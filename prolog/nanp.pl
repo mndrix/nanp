@@ -58,6 +58,7 @@ invalid(Number) :-
 %
 %    * `e_164` - [E.164](https://en.wikipedia.org/wiki/E.164) (like "+17606668462")
 %    * `dial(us)` - how to dial from inside the US (like "1-760-666-8462")
+%    * `ten_digit` - local, ten-digit dialing (like "760-666-8462")
 %    * `traditional` - traditional American format (like "(760) 666-8462")
 %    * `uri` - as a URI (like "tel:+17606668462")
 %
@@ -70,8 +71,10 @@ format(e_164,nanp(A,O,S)) --> % https://en.wikipedia.org/wiki/E.164
     area_code(A),
     office_code(O),
     subscriber_code(S).
-format(dial(us),nanp(A,O,S)) --> % format describes dialing a number from US
+format(dial(us),Number) --> % format describes dialing a number from US
     "1-",
+    format(ten_digit,Number).
+format(ten_digit,nanp(A,O,S)) -->
     area_code(A),
     "-",
     office_code(O),
