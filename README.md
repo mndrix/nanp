@@ -1,11 +1,19 @@
 # Synopsis
 
 ```prolog
-:- use_module(library(nanp)).
-?-  % give one motivating example
+:- use_module(library(nanp), []).
+
+?- nanp:format(e_164,nanp(760,666,8462),String).
+String = "+17606668462".
+
+?- nanp:format(traditional,Num,`(760) 666-8462`).
+Num = nanp(760, 666, 8462).
 ```
 
 # Description
+
+A library for working with telephone numbers assigned under the North American Numbering Plan.  This includes telephone numbers from many countries in North America and the Caribbean.
+
 
 # Installation
 
